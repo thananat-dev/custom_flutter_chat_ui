@@ -11,6 +11,7 @@ class AttachmentButton extends StatelessWidget {
     this.isLoading = false,
     this.onPressed,
     this.padding = EdgeInsets.zero,
+    this.iconImg
   });
 
   /// Show a loading indicator instead of the button.
@@ -21,12 +22,13 @@ class AttachmentButton extends StatelessWidget {
 
   /// Padding around the button.
   final EdgeInsets padding;
+  final String? iconImg;
 
   @override
   Widget build(BuildContext context) => Container(
         margin: InheritedChatTheme.of(context).theme.attachmentButtonMargin ??
             const EdgeInsetsDirectional.fromSTEB(
-              8,
+              0,
               0,
               0,
               0,
@@ -50,7 +52,7 @@ class AttachmentButton extends StatelessWidget {
                 )
               : InheritedChatTheme.of(context).theme.attachmentButtonIcon ??
                   Image.asset(
-                    'assets/icon-attachment.png',
+                    iconImg ?? "",
                     color: InheritedChatTheme.of(context).theme.inputTextColor,
                     package: 'flutter_chat_ui',
                   ),

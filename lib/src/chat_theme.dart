@@ -27,7 +27,7 @@ const dark = Color(0xff1f1c38);
 const error = Color(0xffff6767);
 
 /// N0.
-const neutral0 = Color(0xff1d1c21);
+const neutral0 = Color(0xFF05235B);
 
 /// N1.
 const neutral1 = Color(0xff615e6e);

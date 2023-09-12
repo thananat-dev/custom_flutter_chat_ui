@@ -49,10 +49,11 @@ class _InputState extends State<Input> {
     onKeyEvent: (node, event) {
       if (event.physicalKey == PhysicalKeyboardKey.enter &&
           !HardwareKeyboard.instance.physicalKeysPressed.any(
-            (el) => <PhysicalKeyboardKey>{
-              PhysicalKeyboardKey.shiftLeft,
-              PhysicalKeyboardKey.shiftRight,
-            }.contains(el),
+                (el) =>
+                <PhysicalKeyboardKey>{
+                  PhysicalKeyboardKey.shiftLeft,
+                  PhysicalKeyboardKey.shiftRight,
+                }.contains(el),
           )) {
         if (event is KeyDownEvent) {
           _handleSendPressed();
@@ -110,41 +111,55 @@ class _InputState extends State<Input> {
 
   Widget _inputBuilder() {
     final query = MediaQuery.of(context);
-    final buttonPadding = InheritedChatTheme.of(context)
+    final buttonPadding = InheritedChatTheme
+        .of(context)
         .theme
         .inputPadding
         .copyWith(left: 16, right: 16);
     final safeAreaInsets = isMobile
         ? EdgeInsets.fromLTRB(
-            query.padding.left,
-            0,
-            query.padding.right,
-            query.viewInsets.bottom + query.padding.bottom,
-          )
+      query.padding.left,
+      0,
+      query.padding.right,
+      query.viewInsets.bottom + query.padding.bottom,
+    )
         : EdgeInsets.zero;
-    final textPadding = InheritedChatTheme.of(context)
+    final textPadding = InheritedChatTheme
+        .of(context)
         .theme
         .inputPadding
         .copyWith(left: 0, right: 0)
         .add(
-          EdgeInsets.fromLTRB(
-            widget.onAttachmentPressed != null ? 0 : 24,
-            0,
-            _sendButtonVisible ? 0 : 24,
-            0,
-          ),
-        );
+      EdgeInsets.fromLTRB(
+        widget.onAttachmentPressed != null ? 0 : 24,
+        0,
+        _sendButtonVisible ? 0 : 24,
+        0,
+      ),
+    );
 
     return Focus(
       autofocus: !widget.options.autofocus,
       child: Padding(
-        padding: InheritedChatTheme.of(context).theme.inputMargin,
+        padding: InheritedChatTheme
+            .of(context)
+            .theme
+            .inputMargin,
         child: Material(
-          borderRadius: InheritedChatTheme.of(context).theme.inputBorderRadius,
-          color: InheritedChatTheme.of(context).theme.inputBackgroundColor,
+          borderRadius: InheritedChatTheme
+              .of(context)
+              .theme
+              .inputBorderRadius,
+          color: InheritedChatTheme
+              .of(context)
+              .theme
+              .inputBackgroundColor,
           child: Container(
             decoration:
-                InheritedChatTheme.of(context).theme.inputContainerDecoration,
+            InheritedChatTheme
+                .of(context)
+                .theme
+                .inputContainerDecoration,
             padding: safeAreaInsets,
             child: Row(
               textDirection: TextDirection.ltr,
@@ -153,8 +168,18 @@ class _InputState extends State<Input> {
                   AttachmentButton(
                     isLoading: widget.isAttachmentUploading ?? false,
                     onPressed: widget.onAttachmentPressed,
-                    padding: buttonPadding,
+                    iconImg: 'assets/icon-attachment.png',
                   ),
+                AttachmentButton(
+                  isLoading: widget.isAttachmentUploading ?? false,
+                  onPressed: widget.onAttachmentPressed,
+                  iconImg: 'assets/icon-attachment.png',
+                ),
+                AttachmentButton(
+                  isLoading: widget.isAttachmentUploading ?? false,
+                  onPressed: widget.onAttachmentPressed,
+                  iconImg: 'assets/icon-attachment.png',
+                ),
                 Expanded(
                   child: Padding(
                     padding: textPadding,
@@ -164,39 +189,48 @@ class _InputState extends State<Input> {
                       autofocus: widget.options.autofocus,
                       enableSuggestions: widget.options.enableSuggestions,
                       controller: _textController,
-                      cursorColor: InheritedChatTheme.of(context)
+                      cursorColor: InheritedChatTheme
+                          .of(context)
                           .theme
                           .inputTextCursorColor,
-                      decoration: InheritedChatTheme.of(context)
+                      decoration: InheritedChatTheme
+                          .of(context)
                           .theme
                           .inputTextDecoration
                           .copyWith(
-                            hintStyle: InheritedChatTheme.of(context)
-                                .theme
-                                .inputTextStyle
-                                .copyWith(
-                                  color: InheritedChatTheme.of(context)
-                                      .theme
-                                      .inputTextColor
-                                      .withOpacity(0.5),
-                                ),
-                            hintText:
-                                InheritedL10n.of(context).l10n.inputPlaceholder,
-                          ),
+                        hintStyle: InheritedChatTheme
+                            .of(context)
+                            .theme
+                            .inputTextStyle
+                            .copyWith(
+                          color: InheritedChatTheme
+                              .of(context)
+                              .theme
+                              .inputTextColor
+                              .withOpacity(0.5),
+                        ),
+                        hintText:
+                        InheritedL10n
+                            .of(context)
+                            .l10n
+                            .inputPlaceholder,
+                      ),
                       focusNode: _inputFocusNode,
                       keyboardType: widget.options.keyboardType,
                       maxLines: 5,
                       minLines: 1,
                       onChanged: widget.options.onTextChanged,
                       onTap: widget.options.onTextFieldTap,
-                      style: InheritedChatTheme.of(context)
+                      style: InheritedChatTheme
+                          .of(context)
                           .theme
                           .inputTextStyle
                           .copyWith(
-                            color: InheritedChatTheme.of(context)
-                                .theme
-                                .inputTextColor,
-                          ),
+                        color: InheritedChatTheme
+                            .of(context)
+                            .theme
+                            .inputTextColor,
+                      ),
                       textCapitalization: TextCapitalization.sentences,
                     ),
                   ),
@@ -238,7 +272,8 @@ class _InputState extends State<Input> {
   }
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
+  Widget build(BuildContext context) =>
+      GestureDetector(
         onTap: () => _inputFocusNode.requestFocus(),
         child: _inputBuilder(),
       );
